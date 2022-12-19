@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/lib/DataSource.php';
 $database = new DataSource();
-$sql = "DELETE FROM toy WHERE id=?";
+$sql = "DELETE FROM 'bauelemente WHERE id=?";
 $paramType = 'i';
 $paramValue = array(
     $_GET["id"]

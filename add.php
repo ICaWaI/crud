@@ -1,15 +1,19 @@
 <?php
+
 require_once __DIR__ . '/lib/DataSource.php';
+
 $database = new DataSource();
+
 if (isset($_POST["submit"])) {
-    $sql = "INSERT INTO toy(name, code, category, price, stock_count) VALUES(?, ?, ?, ?, ?)";
-    $paramType = 'sssdi';
+    $sql = "INSERT INTO 'bauelemente'('typ', 'bezeichnung', 'artikelnr', 'zusatz', 'anlage', 'zeichnung') VALUES(?, ?, ?, ?, ?, ?)";
+    $paramType = 'ssisss';
     $paramValue = array(
-        $_POST["name"],
-        $_POST["code"],
-        $_POST["category"],
-        $_POST["price"],
-        $_POST["stock_count"]
+        $_POST["typ"],
+        $_POST["bezeichnung"],
+        $_POST["artikelnr"],
+        $_POST["zusatz"],
+        $_POST["anlage"],
+        $_POST["zeichnung"]
     );
     $result = $database->insert($sql, $paramType, $paramValue);
     if (! $result) {
@@ -19,7 +23,9 @@ if (isset($_POST["submit"])) {
     }
 }
 ?>
+
 <html>
+
 <head>
 
 <link href="css/style.css" type="text/css" rel="stylesheet" />
@@ -36,37 +42,42 @@ if (isset($_POST["submit"])) {
             <div class="error">
                 <?php echo $message;?>
                 </div><?php }?>
-            <h1>Add Record</h1>
+            <h1>Neuer Eintrag</h1>
             <div class="row">
-                <label class="text-left">Name: <span id="name-info"
+                <label class="text-left">Typ: <span id="typ-info"
                     class="validation-message"></span></label><input
-                    type="text" name="name" id="name"
+                    type="text" name="typ" id="typ"
                     class="full-width ">
             </div>
             <div class="row">
-                <label class="text-left">Code: <span id="code-info"
+                <label class="text-left">Bezeichnung: <span id="bezeichnung-info"
                     class="validation-message"></span></label> <input
-                    type="text" name="code" id="code"
+                    type="text" name="bezeichnung" id="bezeichnung"
                     class="full-width ">
             </div>
             <div class="row">
-                <label class="text-left">Category: <span
-                    id="category-info" class="validation-message"></span></label><input
-                    type="text" name="category" id="category"
+                <label class="text-left">Artikelnummer: <span
+                    id="artikelnr-info" class="validation-message"></span></label><input
+                    type="text" name="artikelnr" id="artikelnr"
                     class="full-width ">
             </div>
             <div class="row">
-                <label class="text-left">Price: <span id="price-info"
+                <label class="text-left">Zusatz: <span id="zusatz-info"
                     class="validation-message"></span></label><input
-                    type="text" name="price" id="price"
+                    type="text" name="zusatz" id="zusatz"
                     class="full-width">
             </div>
             <div class="row">
-                <label class="text-left">Stock Count: <span
-                    id="stock-count-info" class="validation-message"></span></label><input
-                    type="text" name="stock_count" id="stock_count"
+                <label class="text-left">Maschine: <span
+                    id="anlage-info" class="validation-message"></span></label><input
+                    type="text" name="anlage" id="anlage"
                     class="full-width ">
             </div>
+            <div class="row">
+                <label class="text-left">Pfad zur Zeichnung: <span
+                    id="zeichnung-info" class="validation-message"></span></label><input
+                    type="text" name="zeichnung" id="zeichnung"
+                    class="full-width ">
             <div class="row">
                 <input type="submit" name="submit" id="btnAddAction"
                     class="full-width " value="Add" />

@@ -1,20 +1,6 @@
 <?php
 
-/**
- * Copyright (C) Phppot
- *
- * Distributed under 'The MIT License'
- * In essence you can modify, distribute, and use for commercial purposes.
- * Though not mandatory, you are requested to
- * attribute Phppot URL https://phppot.com in your code or website.
- */
-
-/**
- * A lightweight generic datasource class for handling database operations.
- * Uses MySqli or PDO and PreparedStatements.
- *
- * @version 3.2 - Namespace removed.
- */
+/** @package  */
 class DataSource
 {
 
@@ -24,19 +10,12 @@ class DataSource
 
     const PASSWORD = '';
 
-    const DATABASENAME = 'db_search_pagination_crud';
+    const DATABASENAME = 'isasearch';
 
     private $connection;
 
-    /**
-     * PHP implicitly takes care of cleanup for default database connection types.
-     * So no need to close connection explicitly.
-     *
-     * Singletons not required in PHP as there is no concept of shared memory.
-     * Every object lives only for a request.
-     *
-     * Keeping things simple and that works!
-     */
+    
+    /** @return void  */
     function __construct()
     {
         $this->connection = $this->getConnection();
@@ -52,7 +31,7 @@ class DataSource
         $connection = new \mysqli(self::HOST, self::USERNAME, self::PASSWORD, self::DATABASENAME);
 
         if (mysqli_connect_errno()) {
-            trigger_error("Problem with connecting to database with MySQLi.");
+            trigger_error("Probleme mit der Verbindung zur Datenbank.");
         }
 
         $connection->set_charset("utf8");
@@ -72,7 +51,7 @@ class DataSource
             $connection = new \PDO($dsn, self::USERNAME, self::PASSWORD);
             $connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         } catch (\Exception $e) {
-            exit("PDO database connection error: " . $e->getMessage());
+            exit("PDO Datenbank Verbindungsfehler: " . $e->getMessage());
         }
         return $connection;
     }
@@ -138,12 +117,24 @@ class DataSource
         }
     }
 
+    /**
+     * @param mixed $query 
+     * @param mixed $paramType 
+     * @param mixed $paramArray 
+     * @return int 
+     */
     public function insert($query, $paramType, $paramArray)
     {
         $statement = $this->execute($query, $paramType, $paramArray);
         return $statement->insert_id;
     }
 
+    /**
+     * @param mixed $query 
+     * @param mixed $paramType 
+     * @param mixed $paramArray 
+     * @return int 
+     */
     public function update($query, $paramType, $paramArray)
     {
         $statement = $this->execute($query, $paramType, $paramArray);
@@ -151,6 +142,12 @@ class DataSource
         return $affectedRows;
     }
 
+    /**
+     * @param mixed $query 
+     * @param mixed $paramType 
+     * @param mixed $paramArray 
+     * @return int 
+     */
     public function delete($query, $paramType, $paramArray)
     {
         $statement = $this->execute($query, $paramType, $paramArray);
@@ -158,6 +155,12 @@ class DataSource
         return $affectedRows;
     }
 
+    /**
+     * @param mixed $query 
+     * @param string $paramType 
+     * @param array $paramArray 
+     * @return int 
+     */
     public function getRecordCount($query, $paramType = "", $paramArray = array())
     {
         $statement = $this->execute($query, $paramType, $paramArray);

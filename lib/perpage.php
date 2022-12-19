@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * @param mixed $count 
+ * @param string $per_page 
+ * @param mixed $href 
+ * @return string 
+ */
 function perpage($count, $per_page = '10', $href)
 {
     $output = '';

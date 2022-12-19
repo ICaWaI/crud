@@ -2,24 +2,28 @@ function validate() {
 	var valid = true;
 	$(".info").html('');
 
-	if (!$("#name").val()) {
-		$("#name-info").html("required.");
+	if (!$("#typ").val()) {
+		$("#typ-info").html("benötigt.");
 		valid = false;
 	}
-	if (!$("#code").val()) {
-		$("#code-info").html("required.");
+	if (!$("#bezeichnung").val()) {
+		$("#bezeichnung-info").html("benötigt.");
 		valid = false;
 	}
-	if (!$("#category").val()) {
-		$("#category-info").html("required.");
+	if (!$("#artikelnr").val()) {
+		$("#artikelnr-info").html("benötigt.");
 		valid = false;
 	}
-	if (!$("#price").val()) {
-		$("#price-info").html("required.");
+	if (!$("#zusatz").val()) {
+		$("#zusatz-info").html("benötigt.");
 		valid = false;
 	}
-	if (!$("#stock_count").val()) {
-		$("#stock-count-info").html("required.");
+	if (!$("#anlage").val()) {
+		$("#anlage-info").html("benötigt.");
+		valid = false;
+	}
+	if (!$("#zeichnung").val()) {
+		$("#zeichnung-info").html("benötigt.");
 		valid = false;
 	}
 	return valid;
