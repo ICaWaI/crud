@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/lib/perpage.php';
-require_once __DIR__ . '/lib/DataSource.php';
+require_once __DIR__ . "/lib/perpage.php";
+require_once __DIR__ . "/lib/DataSource.php";
 $database = new DataSource();
 
 $typ = "";
@@ -36,7 +36,7 @@ if (! empty($_POST["search"])) {
     }
 }
 $orderby = " ORDER BY id desc";
-$sql = "SELECT * FROM 'bauelemente' " . $queryCondition;
+$sql = "SELECT * FROM bauelemente " . $queryCondition;
 $href = 'index.php';
 
 $perPage = 3;
@@ -111,16 +111,9 @@ button, input[type=submit].perpage-link {
             <form name="frmSearch" method="post" action="">
                 <div>
                     <p>
-                        <input type="text" placeholder="Bezeichnung"
-                            name="search[typ]"
-                            value="<?php echo $typ; ?>" /> <input
-                            type="text" placeholder="Artikelnummer"
-                            name="search[artikelnr]"
-                            value="<?php echo $artikelnr; ?>" /> <input
-                            type="submit" name="go" class="btnSearch"
-                            value="Search"> <input type="reset"
-                            class="btnReset" value="Reset"
-                            onclick="window.location='index.php'">
+                        <input type="text" placeholder="Bezeichnung" name="search[typ]" value="<?php echo $typ; ?>" />
+                        <input type="text" placeholder="Artikelnummer" name="search[artikelnr]" value="<?php echo $artikelnr; ?>" />
+                        <input type="submit" name="go" class="btnSearch" value="Search"> <input type="reset" class="btnReset" value="Reset" onclick="window.location='index.php'">
                     </p>
                 </div>
                 <div>
@@ -138,22 +131,21 @@ button, input[type=submit].perpage-link {
                         </tr>
                     </thead>
                     <tbody>
+
                     <?php
                     if (! empty($result)) {
                         foreach ($result as $key => $value) {
                             if (is_numeric($key)) {
                                 ?>
-                     <tr>
+                        <tr>
                             <td><?php echo $result[$key]['typ']; ?></td>
                             <td><?php echo $result[$key]['bezeichnung']; ?></td>
                             <td><?php echo $result[$key]['artikelnr']; ?></td>
                             <td><?php echo $result[$key]['zusatz']; ?></td>
                             <td><?php echo $result[$key]['anlage']; ?></td>
                             <td><?php echo $result[$key]['zeichnung']; ?></td>
-                            <td><a class="mr-20"
-                                href="edit.php?id=<?php echo $result[$key]["id"]; ?>">Ändern</a>
-                                <a
-                                href="delete.php?action=delete&id=<?php echo $result[$key]["id"]; ?>">Löschen</a>
+                            <td><a class="mr-20" href="edit.php?id=<?php echo $result[$key]["id"]; ?>">Ändern</a>
+                                <a href="delete.php?action=delete&id=<?php echo $result[$key]["id"]; ?>">Löschen</a>
                             </td>
                         </tr>
                     <?php
